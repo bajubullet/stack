@@ -1,12 +1,16 @@
 package stack
 
-import "errors"
+import (
+  "errors"
+  "fmt"
+)
 
 type Stack struct {
   data []int
   top int
 }
 
+// Checks if the stack is empty.
 func (s *Stack) IsEmpty() bool {
   if s.top == 0 {
     return true
@@ -14,6 +18,7 @@ func (s *Stack) IsEmpty() bool {
   return false
 }
 
+// Checks if the stack is full.
 func (s *Stack) IsFull() bool {
   if (s.top == len(s.data)-1) {
     return true
@@ -21,6 +26,7 @@ func (s *Stack) IsFull() bool {
   return false
 }
 
+// Pushes and item onto stack.
 func (s *Stack) Push(num int) (err error) {
   err = nil
   if s.IsFull() {
@@ -32,6 +38,7 @@ func (s *Stack) Push(num int) (err error) {
   return
 }
 
+// Pops and an item from the stack.
 func (s *Stack) Pop() (value int, err error) {
   err = nil
   value = 0
@@ -44,6 +51,16 @@ func (s *Stack) Pop() (value int, err error) {
   return
 }
 
+// Print stack.
+func (s *Stack) Print() {
+  if s.IsEmpty() {
+    fmt.Println("Empty stack.")
+  } else {
+    fmt.Println(s.data[:s.top])
+  }
+}
+
+// Creates a new empty stack of given size.
 func NewStack(size int) *Stack {
   s := new(Stack)
   s.data = make([]int, size)
